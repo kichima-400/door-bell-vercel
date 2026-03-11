@@ -20,7 +20,7 @@ door-bell/
 
 ---
 
-## 1. GitHub にリポジトリを作成して push
+## 1. GitHub にリポジトリを作成して push（GitHub と Vercel の自動連携のために必要）
 
 ```bash
 cd door-bell

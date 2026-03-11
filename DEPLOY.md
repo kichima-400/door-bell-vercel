@@ -20,16 +20,44 @@ door-bell/
 
 ---
 
-## 1. Vercel にデプロイ
+## 1. GitHub にリポジトリを作成して push
 
-1. https://vercel.com にアクセス → GitHub アカウントでサインイン
+```bash
+cd door-bell
+git init
+git add .
+git commit -m "initial commit"
+# GitHub でリポジトリ作成後
+git remote add origin https://github.com/あなたのユーザー名/door-bell.git
+git push -u origin main
+```
+
+---
+
+## 2. Vercel にデプロイ（GitHub と自動連携）
+
+1. https://vercel.com にアクセス → **GitHub アカウントでサインイン**
 2. **Add New Project** → `door-bell` リポジトリを選択 → **Deploy**
 3. デプロイ完了後に表示される URL をメモ
    例: `https://door-bell-xxx.vercel.app`
 
+> **ここで GitHub との自動連携が有効になります。**
+> 以降は `git push` するだけで Vercel が自動でリビルド・デプロイします。
+> `api/slack.js` を変更した場合も、push すれば自動で本番に反映されます。
+
+### コードを変更したときの手順
+
+```bash
+git add api/slack.js
+git commit -m "fix: 変更内容を説明するメッセージ"
+git push
+```
+
+push 後、Vercel ダッシュボードの **Deployments** タブでデプロイの進行状況を確認できます。
+
 ---
 
-## 2. Slack App を作成
+## 3. Slack App を作成
 
 1. https://api.slack.com/apps を開く
 2. **Create New App** → **From scratch**
@@ -37,7 +65,7 @@ door-bell/
 
 ---
 
-## 3. Incoming Webhook を有効化
+## 4. Incoming Webhook を有効化
 
 1. 左メニュー **Incoming Webhooks** → **ON**
 2. **Add New Webhook to Workspace**
@@ -47,7 +75,7 @@ door-bell/
 
 ---
 
-## 4. Bot Token を取得
+## 5. Bot Token を取得
 
 1. 左メニュー **OAuth & Permissions**
 2. **Bot Token Scopes** → **Add an OAuth Scope** → `chat:write` を追加
@@ -57,28 +85,28 @@ door-bell/
 
 ---
 
-## 5. App Home を有効化
+## 6. App Home を有効化
 
 1. 左メニュー **App Home**
 2. **Home Tab** → **ON**
 
 ---
 
-## 6. Vercel に環境変数を登録
+## 7. Vercel に環境変数を登録
 
 1. Vercel のプロジェクト → **Settings → Environment Variables**
 2. 以下を追加:
 
 | Name | Value |
 |---|---|
-| `BOT_TOKEN` | `xoxb-...`（Step 4 の Bot Token） |
-| `WEBHOOK_URL` | `https://hooks.slack.com/...`（Step 3 の Webhook URL） |
+| `BOT_TOKEN` | `xoxb-...`（Step 5 の Bot Token） |
+| `WEBHOOK_URL` | `https://hooks.slack.com/...`（Step 4 の Webhook URL） |
 
 3. **Deployments → 最新のデプロイ → Redeploy** で反映
 
 ---
 
-## 7. Event Subscriptions を設定
+## 8. Event Subscriptions を設定
 
 1. 左メニュー **Event Subscriptions** → **ON**
 2. **Request URL**: `https://あなたのURL.vercel.app/api/slack`
@@ -88,7 +116,7 @@ door-bell/
 
 ---
 
-## 8. Interactivity を設定
+## 9. Interactivity を設定
 
 1. 左メニュー **Interactivity & Shortcuts** → **ON**
 2. **Request URL**: `https://あなたのURL.vercel.app/api/slack`
@@ -96,7 +124,7 @@ door-bell/
 
 ---
 
-## 9. 動作確認
+## 10. 動作確認
 
 1. Slack → 左メニュー **Apps** → `DoorBell` を検索して追加
 2. **Home** タブを開く

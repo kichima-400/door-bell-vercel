@@ -16,7 +16,7 @@ Slack の App Home からボタンを押すだけで、
 |---|---|
 | `api/slack.js` | Slack イベント・ボタン操作の処理（Vercel） |
 | `package.json` | Node.js プロジェクト設定 |
-| `.env.example` | 環境変数のテンプレート |
+| `.env.example` | 環境変数のテンプレート(※未使用) |
 
 ## 環境変数
 

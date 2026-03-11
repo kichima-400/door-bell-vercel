@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          text: `🚪 *${user}* がドアを開けてほしいようです！ (Please open the door)`,
+          text: `🚪 *${user}* がドア開錠待ちです (Please open the door)`,
         }),
       });
     }

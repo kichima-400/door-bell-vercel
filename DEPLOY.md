@@ -20,21 +20,7 @@ door-bell/
 
 ---
 
-## 1. GitHub にリポジトリを作成して push
-
-```bash
-cd door-bell
-git init
-git add .
-git commit -m "initial commit"
-# GitHub でリポジトリ作成後
-git remote add origin https://github.com/あなたのユーザー名/door-bell.git
-git push -u origin main
-```
-
----
-
-## 2. Vercel にデプロイ
+## 1. Vercel にデプロイ
 
 1. https://vercel.com にアクセス → GitHub アカウントでサインイン
 2. **Add New Project** → `door-bell` リポジトリを選択 → **Deploy**
@@ -43,7 +29,7 @@ git push -u origin main
 
 ---
 
-## 3. Slack App を作成
+## 2. Slack App を作成
 
 1. https://api.slack.com/apps を開く
 2. **Create New App** → **From scratch**
@@ -51,7 +37,7 @@ git push -u origin main
 
 ---
 
-## 4. Incoming Webhook を有効化
+## 3. Incoming Webhook を有効化
 
 1. 左メニュー **Incoming Webhooks** → **ON**
 2. **Add New Webhook to Workspace**
@@ -61,7 +47,7 @@ git push -u origin main
 
 ---
 
-## 5. Bot Token を取得
+## 4. Bot Token を取得
 
 1. 左メニュー **OAuth & Permissions**
 2. **Bot Token Scopes** → **Add an OAuth Scope** → `chat:write` を追加
@@ -71,28 +57,28 @@ git push -u origin main
 
 ---
 
-## 6. App Home を有効化
+## 5. App Home を有効化
 
 1. 左メニュー **App Home**
 2. **Home Tab** → **ON**
 
 ---
 
-## 7. Vercel に環境変数を登録
+## 6. Vercel に環境変数を登録
 
 1. Vercel のプロジェクト → **Settings → Environment Variables**
 2. 以下を追加:
 
 | Name | Value |
 |---|---|
-| `BOT_TOKEN` | `xoxb-...`（Step 5 の Bot Token） |
-| `WEBHOOK_URL` | `https://hooks.slack.com/...`（Step 4 の Webhook URL） |
+| `BOT_TOKEN` | `xoxb-...`（Step 4 の Bot Token） |
+| `WEBHOOK_URL` | `https://hooks.slack.com/...`（Step 3 の Webhook URL） |
 
 3. **Deployments → 最新のデプロイ → Redeploy** で反映
 
 ---
 
-## 8. Event Subscriptions を設定
+## 7. Event Subscriptions を設定
 
 1. 左メニュー **Event Subscriptions** → **ON**
 2. **Request URL**: `https://あなたのURL.vercel.app/api/slack`
@@ -102,7 +88,7 @@ git push -u origin main
 
 ---
 
-## 9. Interactivity を設定
+## 8. Interactivity を設定
 
 1. 左メニュー **Interactivity & Shortcuts** → **ON**
 2. **Request URL**: `https://あなたのURL.vercel.app/api/slack`
@@ -110,7 +96,7 @@ git push -u origin main
 
 ---
 
-## 10. 動作確認
+## 9. 動作確認
 
 1. Slack → 左メニュー **Apps** → `DoorBell` を検索して追加
 2. **Home** タブを開く

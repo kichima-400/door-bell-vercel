@@ -18,7 +18,7 @@ Slack の App Home からボタンを押すだけで、
 | `package.json` | Node.js プロジェクト設定 |
 | `.env.example` | 環境変数のテンプレート(※未使用) |
 
-## 環境変数
+## Vercelに設定する環境変数
 
 | 変数名 | 内容 |
 |---|---|

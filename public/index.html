@@ -23,44 +23,8 @@
       user-select: none;
     }
 
-    /* --- 名前設定画面 --- */
-    #name-setup {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      padding: 32px;
-    }
-
-    #name-setup .icon { font-size: 72px; }
-    #name-setup h1 { font-size: 28px; font-weight: 700; }
-    #name-setup p { font-size: 14px; opacity: 0.85; }
-
-    #name-input {
-      padding: 14px 18px;
-      border-radius: 14px;
-      border: none;
-      font-size: 18px;
-      width: 220px;
-      text-align: center;
-      outline: none;
-    }
-
-    .save-btn {
-      background: white;
-      color: #E01E5A;
-      border: none;
-      padding: 14px 40px;
-      border-radius: 28px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    }
-
-    /* --- メイン画面 --- */
     #main {
-      display: none;
+      display: flex;
       flex-direction: column;
       align-items: center;
       gap: 28px;
@@ -98,60 +62,19 @@
     }
 
     #feedback.show { opacity: 1; }
-
-    .change-name-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 13px;
-      opacity: 0.65;
-      cursor: pointer;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
 
-<!-- 名前設定画面 -->
-<div id="name-setup">
-  <div class="icon">🚪</div>
-  <h1>DoorBell</h1>
-  <p>あなたの名前を入力してください</p>
-  <input id="name-input" type="text" placeholder="名前" maxlength="20" autocomplete="off">
-  <button class="save-btn" onclick="saveName()">はじめる</button>
-</div>
-
-<!-- メイン画面 -->
 <div id="main">
   <h1>DoorBell</h1>
   <button id="door-btn" onclick="ring()">🚪</button>
   <div class="btn-label">ドア開けて！</div>
   <div id="feedback"></div>
-  <button class="change-name-btn" onclick="resetName()">名前を変更</button>
 </div>
 
 <script>
-  function saveName() {
-    const name = document.getElementById("name-input").value.trim();
-    if (!name) return;
-    localStorage.setItem("doorbell-name", name);
-    showMain();
-  }
-
-  function showMain() {
-    document.getElementById("name-setup").style.display = "none";
-    document.getElementById("main").style.display = "flex";
-  }
-
-  function resetName() {
-    localStorage.removeItem("doorbell-name");
-    document.getElementById("name-input").value = "";
-    document.getElementById("name-setup").style.display = "flex";
-    document.getElementById("main").style.display = "none";
-  }
-
   async function ring() {
-    const name = localStorage.getItem("doorbell-name") || "";
     const btn = document.getElementById("door-btn");
     const fb = document.getElementById("feedback");
 
@@ -163,7 +86,7 @@
       const res = await fetch("/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({}),
       });
       fb.textContent = res.ok ? "✅ 通知を送りました！" : "❌ エラーが発生しました";
     } catch {
@@ -176,15 +99,6 @@
     }, 3000);
   }
 
-  // 名前が保存済みならメイン画面へ
-  if (localStorage.getItem("doorbell-name")) showMain();
-
-  // Enter キーで保存
-  document.getElementById("name-input").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") saveName();
-  });
-
-  // Service Worker 登録（PWA用）
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js");
   }

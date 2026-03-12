@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const { name } = req.body || {};
-  const who = name ? `*${name}* が` : "xx";
+  const who = name ? `*${name}* が` : " ";
 
   const response = await fetch(process.env.WEBHOOK_URL, {
     method: "POST",

@@ -4,13 +4,13 @@ export default async function handler(req, res) {
   }
 
   const { name } = req.body || {};
-  const who = name ? `*${name}* が` : "誰かが";
+  const who = name ? `*${name}* が` : "xx";
 
   const response = await fetch(process.env.WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      text: `🚪 ${who}ドアを開けてほしいようです！ (Please open the door)`,
+      text: `🚪 ${who}ドアを開けて下さい`,
     }),
   });
 
